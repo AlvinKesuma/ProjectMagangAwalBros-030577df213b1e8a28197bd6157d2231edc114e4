@@ -130,11 +130,11 @@ Data Kepatuhan Identifikasi
                     <div class="row g-2 mb-3">
                         <div class="col">
                             <label for="num" class="form-label">Num</label>
-                            <input type="number" step="0.1" id="num" name="num" class="form-control" placeholder="Masukkan Num" readonly>
+                            <input type="number" step="0.1" id="num" name="num" class="form-control" placeholder="Num" readonly>
                         </div>
                         <div class="col">
                             <label for="denum" class="form-label">Denum</label>
-                            <input type="number" step="0.1" id="denum" name="denum" class="form-control" placeholder="Masukkan Denum" readonly>
+                            <input type="number" step="0.1" id="denum" name="denum" class="form-control" placeholder="Denum" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
