@@ -48,6 +48,7 @@ Data Waktu Tanggap Operasi Seksio Sesarea Emergensi ≤ 30 Menit
                             <th>Unit</th>
                             <th>Num</th>
                             <th>Denum</th>
+                            <th>Num Denum</th>
                             <th>Bulan</th>
                             <th>Tahun</th>
                             <th>Aksi</th>
@@ -60,6 +61,7 @@ Data Waktu Tanggap Operasi Seksio Sesarea Emergensi ≤ 30 Menit
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ number_format($item->num, 1) }}</td>
                                 <td>{{ number_format($item->denum, 1) }}</td>
+                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
                                 <td>{{ $item->year }}</td>
                                 <td>
@@ -78,7 +80,7 @@ Data Waktu Tanggap Operasi Seksio Sesarea Emergensi ≤ 30 Menit
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Tidak ada data.</td>
+                                <td colspan="8" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>

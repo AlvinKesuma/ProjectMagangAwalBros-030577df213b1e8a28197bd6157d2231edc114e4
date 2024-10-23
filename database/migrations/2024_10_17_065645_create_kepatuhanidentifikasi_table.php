@@ -17,6 +17,7 @@ class CreateKepatuhanIdentifikasiTable extends Migration
             $table->decimal('kip4', 5, 1);
             $table->decimal('num', 5, 1);
             $table->decimal('denum', 5, 1);
+            $table->string('numdenum');
             $table->string('month');
             $table->year('year');
             $table->timestamps();

@@ -43,6 +43,7 @@ Data Kepatuhan Identifikasi
                             <th>KIP 4</th>
                             <th>Num</th>
                             <th>Denum</th>
+                            <th>Num Denum</th>
                             <th>Bulan</th>
                             <th>Tahun</th>
                             <th>Aksi</th>
@@ -59,6 +60,7 @@ Data Kepatuhan Identifikasi
                                 <td>{{ $item->kip4 }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
+                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
                                 <td>{{ $item->year }}</td>
                                 <td>
@@ -81,7 +83,7 @@ Data Kepatuhan Identifikasi
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="11" class="text-center">Tidak ada data.</td>
+                                <td colspan="12" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>

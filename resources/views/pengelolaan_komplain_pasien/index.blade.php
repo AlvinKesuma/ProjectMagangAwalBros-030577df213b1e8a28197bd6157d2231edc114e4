@@ -48,6 +48,7 @@ Data Monitoring Penanganan Komplain Pasien Rawat Inap
                             <th>Unit</th>
                             <th>Num</th>
                             <th>Denum</th>
+                            <th>Num Denum</th>
                             <th>Bulan</th>
                             <th>Tahun</th>
                             <th>Aksi</th>
@@ -60,6 +61,7 @@ Data Monitoring Penanganan Komplain Pasien Rawat Inap
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ number_format($item->num, 1) }}</td>
                                 <td>{{ number_format($item->denum, 1) }}</td>
+                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
                                 <td>{{ $item->year }}</td>
                                 <td>
@@ -78,7 +80,7 @@ Data Monitoring Penanganan Komplain Pasien Rawat Inap
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Tidak ada data.</td>
+                                <td colspan="8" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>

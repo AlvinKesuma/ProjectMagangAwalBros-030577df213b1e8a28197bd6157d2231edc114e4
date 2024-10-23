@@ -39,6 +39,13 @@ class KepatuhanIdentifikasiController extends Controller
         $validated['num'] = $num;
         $validated['denum'] = $denum;
 
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
+
         KepatuhanIdentifikasi::create($validated);
 
         return redirect()->route('kepatuhan-identifikasi.index')->with('success', 'Data berhasil disimpan.');
@@ -70,6 +77,13 @@ class KepatuhanIdentifikasiController extends Controller
         // Gabungkan num dan denum ke dalam data yang akan diperbarui
         $validated['num'] = $num;
         $validated['denum'] = $denum;
+
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
 
         $data = KepatuhanIdentifikasi::findOrFail($id);
         $data->update($validated);

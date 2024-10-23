@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('unit')->default('Yanmed');
             $table->decimal('num', 4, 1)->default(0.0); 
-            $table->decimal('denum', 4, 1)->default(0.0); 
+            $table->decimal('denum', 4, 1)->default(0.0);
+            $table->string('numdenum'); 
             $table->string('month');
             $table->year('year');
             $table->timestamps();

@@ -29,6 +29,13 @@ class PasienPemberianDarahController extends Controller
             'year' => 'required|in:2023,2024',
         ]);
 
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
+
         PasienPemberianDarah::create($validated);
 
         return redirect()->route('pasien-pemberiandarah.index')->with('success', 'Data berhasil disimpan.');
@@ -50,6 +57,13 @@ class PasienPemberianDarahController extends Controller
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'year' => 'required|in:2023,2024',
         ]);
+
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
 
         $data = PasienPemberianDarah::findOrFail($id);
         $data->update($validated);

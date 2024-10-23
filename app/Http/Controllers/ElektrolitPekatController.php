@@ -29,6 +29,13 @@ class ElektrolitPekatController extends Controller
             'year' => 'required|in:2023,2024',
         ]);
 
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
+
         ElektrolitPekat::create($validated);
 
         return redirect()->route('elektrolit-pekat.index')->with('success', 'Data berhasil disimpan.');
@@ -50,6 +57,13 @@ class ElektrolitPekatController extends Controller
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'year' => 'required|in:2023,2024',
         ]);
+
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
 
         $data = ElektrolitPekat::findOrFail($id);
         $data->update($validated);

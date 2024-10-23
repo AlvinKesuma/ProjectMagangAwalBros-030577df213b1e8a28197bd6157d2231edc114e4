@@ -39,6 +39,7 @@ Data Penurunan Presentasi Kejadian Water Intrussion
                             <th>Unit</th>
                             <th>Num</th>
                             <th>Denum</th>
+                            <th>Num Denum</th>
                             <th>Bulan</th>
                             <th>Tahun</th>
                             <th>Aksi</th>
@@ -51,6 +52,7 @@ Data Penurunan Presentasi Kejadian Water Intrussion
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
+                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
                                 <td>{{ $item->year }}</td>
                                 <td>
@@ -73,7 +75,7 @@ Data Penurunan Presentasi Kejadian Water Intrussion
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Tidak ada data.</td>
+                                <td colspan="8" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>

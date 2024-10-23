@@ -29,6 +29,13 @@ class PencegahanResikoJatuhController extends Controller
             'year' => 'required|in:2023,2024',
         ]);
 
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
+
         PencegahanResikoJatuh::create($validated);
 
         return redirect()->route('pencegahan-resikojatuh.index')->with('success', 'Data berhasil disimpan.');
@@ -50,6 +57,13 @@ class PencegahanResikoJatuhController extends Controller
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'year' => 'required|in:2023,2024',
         ]);
+
+        if ($validated['year'] == '2024') {
+            $numdenum = ($validated['num'] / $validated['denum']) * 100;
+            $validated['numdenum'] = $numdenum;
+        } else {
+            $validated['numdenum'] = '-';
+        }
 
         $data = PencegahanResikoJatuh::findOrFail($id);
         $data->update($validated);
