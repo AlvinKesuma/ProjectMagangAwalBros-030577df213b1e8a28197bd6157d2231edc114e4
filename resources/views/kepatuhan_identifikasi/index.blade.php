@@ -37,15 +37,11 @@ Data Kepatuhan Identifikasi
                         <tr>
                             <th>No</th>
                             <th>Unit</th>
-                            <th>KIP 1</th>
-                            <th>KIP 2</th>
-                            <th>KIP 3</th>
-                            <th>KIP 4</th>
                             <th>Num</th>
                             <th>Denum</th>
-                            <th>Num Denum</th>
                             <th>Bulan</th>
-                            <th>Tahun</th>
+                            <th>2023</th>
+                            <th>2024</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -54,15 +50,11 @@ Data Kepatuhan Identifikasi
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->unit }}</td>
-                                <td>{{ $item->kip1 }}</td>
-                                <td>{{ $item->kip2 }}</td>
-                                <td>{{ $item->kip3 }}</td>
-                                <td>{{ $item->kip4 }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
-                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
-                                <td>{{ $item->year }}</td>
+                                <td>{{ $item->tahun_2023 }}</td>
+                                <td>{{ $item->tahun_2024 }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -74,7 +66,7 @@ Data Kepatuhan Identifikasi
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('kepatuhan-identifikasi.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>
@@ -83,7 +75,7 @@ Data Kepatuhan Identifikasi
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="12" class="text-center">Tidak ada data.</td>
+                                <td colspan="9" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -132,11 +124,11 @@ Data Kepatuhan Identifikasi
                     <div class="row g-2 mb-3">
                         <div class="col">
                             <label for="num" class="form-label">Num</label>
-                            <input type="number" step="0.1" id="num" name="num" class="form-control" placeholder="Num" readonly>
+                            <input type="number" id="num" name="num" class="form-control" placeholder="Num" readonly>
                         </div>
                         <div class="col">
                             <label for="denum" class="form-label">Denum</label>
-                            <input type="number" step="0.1" id="denum" name="denum" class="form-control" placeholder="Denum" readonly>
+                            <input type="number" id="denum" name="denum" class="form-control" placeholder="Denum" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -158,12 +150,16 @@ Data Kepatuhan Identifikasi
                         </select>
                         </div>
                     <div class="mb-3">
-                        <label for="year" class="form-label">Tahun</label>
-                        <select id="year" name="year" class="form-select" required>
-                            <option value="">Pilih Tahun</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                        </select>
+                        <div class="col">
+                            <label for="tahun_2023" class="form-label">Tahun 2023</label>
+                            <input type="number" step="0.1" id="tahun_2023" name="tahun_2023" class="form-control" placeholder="Masukkan nilai tahun 2023" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col">
+                            <label for="tahun_2024" class="form-label">Tahun 2024</label>
+                            <input type="number" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Nilai tahun 2024" readonly>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -221,20 +217,23 @@ Data Kepatuhan Identifikasi
         });
     });
     
-    function calculateSum() {
+    function calculate() {
         const kip1 = parseFloat(document.getElementById('kip1').value) || 0;
         const kip2 = parseFloat(document.getElementById('kip2').value) || 0;
         const kip3 = parseFloat(document.getElementById('kip3').value) || 0;
         const kip4 = parseFloat(document.getElementById('kip4').value) || 0;
-
+        
         const sum = kip1 + kip2 + kip3 + kip4;
+        const denum = sum;
+        const tahun_2024 = denum !== 0 ? ((sum / denum) * 100).toFixed(1) : 0;
 
         document.getElementById('num').value = sum;
-        document.getElementById('denum').value = sum;
+        document.getElementById('denum').value = denum;
+        document.getElementById('tahun_2024').value = tahun_2024;
     }
 
     document.querySelectorAll('#kip1, #kip2, #kip3, #kip4').forEach(input => {
-        input.addEventListener('input', calculateSum);
+        input.addEventListener('input', calculate);
     });
 
     function openCreateModal() {
@@ -261,7 +260,8 @@ Data Kepatuhan Identifikasi
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
         document.getElementById('month').value = data.month;
-        document.getElementById('year').value = data.year;
+        document.getElementById('tahun_2023').value = data.tahun_2023;
+        document.getElementById('tahun_2024').value = data.tahun_2024;
     }
 </script>
 @endsection

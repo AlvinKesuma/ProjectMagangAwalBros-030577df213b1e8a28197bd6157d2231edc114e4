@@ -13,9 +13,9 @@ class CreateTimeOutPoliGigiTable extends Migration
             $table->string('unit');
             $table->decimal('num', 5, 1);
             $table->decimal('denum', 5, 1);
-            $table->string('numdenum');
             $table->string('month');
-            $table->year('year');
+            $table->decimal('tahun_2023', 5, 1);
+            $table->decimal('tahun_2024', 5, 1);
             $table->timestamps();
         });
     }

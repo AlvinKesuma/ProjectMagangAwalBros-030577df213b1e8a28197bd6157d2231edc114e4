@@ -25,15 +25,11 @@ class LOSgagalJantungAkutController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'tahun_2023' => 'required|numeric|between:0,100.0', 
         ]);
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
 
         // Create a new entry
         LOSgagalJantungAkut::create($validated);
@@ -54,15 +50,11 @@ class LOSgagalJantungAkutController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'tahun_2023' => 'required|numeric|between:0,100.0', 
         ]);
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
 
         // Find the existing entry and update it
         $data = LOSgagalJantungAkut::findOrFail($id);

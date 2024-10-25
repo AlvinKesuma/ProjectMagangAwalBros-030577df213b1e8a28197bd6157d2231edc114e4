@@ -39,9 +39,9 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
                             <th>Unit</th>
                             <th>Num</th>
                             <th>Denum</th>
-                            <th>Num Denum</th>
                             <th>Bulan</th>
-                            <th>Tahun</th>
+                            <th>2023</th>
+                            <th>2024</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -52,9 +52,9 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
-                                <td>{{ is_numeric($item->numdenum) ? number_format($item->numdenum, 2) : $item->numdenum }}</td>
                                 <td>{{ $item->month }}</td>
-                                <td>{{ $item->year }}</td>
+                                <td>{{ $item->tahun_2023 }}</td>
+                                <td>{{ $item->tahun_2024 }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -66,7 +66,7 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('kepatuhan-visit-dokter-spesialis.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>
@@ -75,7 +75,7 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">Tidak ada data.</td>
+                                <td colspan="9" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -132,12 +132,16 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="year" class="form-label">Tahun</label>
-                        <select id="year" name="year" class="form-select" required>
-                            <option value="">Pilih Tahun</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                        </select>
+                        <div class="col">
+                            <label for="tahun_2023" class="form-label">Tahun 2023</label>
+                            <input type="number" step="0.1" id="tahun_2023" name="tahun_2023" class="form-control" placeholder="Masukkan nilai tahun 2023" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col">
+                            <label for="tahun_2024" class="form-label">Tahun 2024</label>
+                            <input type="number" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Nilai tahun 2024" readonly>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -195,6 +199,21 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
         });
     });
 
+    function calculate() {        
+        const num = parseFloat(document.getElementById('num').value) || 0;
+        const denum = parseFloat(document.getElementById('denum').value) || 0;
+
+        const tahun_2024 = denum !== 0 ? ((num / denum) * 100).toFixed(1) : 0;
+
+        document.getElementById('num').value = num;
+        document.getElementById('denum').value = denum;
+        document.getElementById('tahun_2024').value = tahun_2024;
+    }
+
+    document.querySelectorAll('#num, #denum').forEach(input => {
+        input.addEventListener('input', calculate);
+    });
+
     function openCreateModal() {
         document.getElementById('formModal').reset();
         document.getElementById('formModal').action = "{{ route('kepatuhan-visit-dokter-spesialis.store') }}";
@@ -215,7 +234,8 @@ Data Kepatuhan Waktu Visit Dokter Spesialis Sebelum jam 14:00 WIB
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
         document.getElementById('month').value = data.month;
-        document.getElementById('year').value = data.year;
+        document.getElementById('tahun_2023').value = data.tahun_2023;
+        document.getElementById('tahun_2024').value = data.tahun_2024;
     }
 </script>
 @endsection

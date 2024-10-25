@@ -28,24 +28,18 @@ class KepatuhanIdentifikasiController extends Controller
             'kip3' => 'required|numeric|between:0,100.0',
             'kip4' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024',
+            'tahun_2023' => 'required|numeric|between:0,100.0',
         ]);
 
-        // Hitung total num dan denum dari kip1 hingga kip4
         $num = $validated['kip1'] + $validated['kip2'] + $validated['kip3'] + $validated['kip4'];
         $denum = $num;
 
-        // Gabungkan num dan denum ke dalam data yang akan disimpan
         $validated['num'] = $num;
         $validated['denum'] = $denum;
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
-
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
+        
         KepatuhanIdentifikasi::create($validated);
 
         return redirect()->route('kepatuhan-identifikasi.index')->with('success', 'Data berhasil disimpan.');
@@ -66,24 +60,19 @@ class KepatuhanIdentifikasiController extends Controller
             'kip2' => 'required|numeric|between:0,100.0',
             'kip3' => 'required|numeric|between:0,100.0',
             'kip4' => 'required|numeric|between:0,100.0',
+            'kip4' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024',
+            'tahun_2023' => 'required|numeric|between:0,100.0',
         ]);
 
-        // Hitung total num dan denum dari kip1 hingga kip4
         $num = $validated['kip1'] + $validated['kip2'] + $validated['kip3'] + $validated['kip4'];
         $denum = $num;
 
-        // Gabungkan num dan denum ke dalam data yang akan diperbarui
         $validated['num'] = $num;
         $validated['denum'] = $denum;
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
 
         $data = KepatuhanIdentifikasi::findOrFail($id);
         $data->update($validated);

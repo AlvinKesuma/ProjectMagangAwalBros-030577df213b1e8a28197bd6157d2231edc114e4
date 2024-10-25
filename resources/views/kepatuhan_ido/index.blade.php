@@ -130,12 +130,10 @@ Data Kepatuhan Penerapan HAIs: IDO
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="year" class="form-label">Tahun</label>
-                        <select id="year" name="year" class="form-select" required>
-                            <option value="">Pilih Tahun</option>
-                            <option value="2023">2023</option>
-                            <option value="2024">2024</option>
-                        </select>
+                        <div class="col">
+                            <label for="year" class="form-label">Tahun</label>
+                            <input type="number" step="0.1" id="year" name="year" class="form-control" value="2024" readonly>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

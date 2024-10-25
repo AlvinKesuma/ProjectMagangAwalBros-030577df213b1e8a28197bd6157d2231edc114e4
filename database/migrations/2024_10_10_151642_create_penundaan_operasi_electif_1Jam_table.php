@@ -15,12 +15,12 @@ class CreatePenundaanOperasiElectif1JamTable extends Migration
     {
         Schema::create('Penundaan_Operasi_Electif_1Jam', function (Blueprint $table) {
             $table->id();
-            $table->string('unit')->default('Kamar Bedah');
-            $table->decimal('num', 4, 1)->default(0.0); 
-            $table->decimal('denum', 4, 1)->default(0.0); 
-            $table->string('numdenum');
+            $table->string('unit');
+            $table->decimal('num', 5, 1);
+            $table->decimal('denum', 5, 1);
             $table->string('month');
-            $table->year('year');
+            $table->decimal('tahun_2023', 5, 1);
+            $table->decimal('tahun_2024', 5, 1);
             $table->timestamps();
         });
     }

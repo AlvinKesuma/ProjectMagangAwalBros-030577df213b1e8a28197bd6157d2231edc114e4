@@ -15,7 +15,7 @@ class PasienPemberianObatController extends Controller
 
     public function create()
     {
-        $units = ['R.Pucuk Puteri/Pucuk Rebung','Bunga Kiambang', 'Bunga Kesumba','Poliklinik','UGD', 'Pucuk Bersusun', 'Tampuk Manggis', 'Perinatologi','ICU/ICCU']; // Add more units if needed
+        $units = ['R.Pucuk Puteri/Pucuk Rebung','Bunga Kiambang', 'Bunga Kesumba','Poliklinik','UGD', 'Pucuk Bersusun', 'Tampuk Manggis', 'Perinatologi','ICU/ICCU']; 
         return view('pasien_pemberianobat.create', compact('units'));
     }
 
@@ -26,15 +26,11 @@ class PasienPemberianObatController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024',
+            'tahun_2023' => 'required|numeric|between:0,100.0',
         ]);
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
 
         PasienPemberianObat::create($validated);
 
@@ -55,15 +51,11 @@ class PasienPemberianObatController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024',
+            'tahun_2023' => 'required|numeric|between:0,100.0',
         ]);
 
-        if ($validated['year'] == '2024') {
-            $numdenum = ($validated['num'] / $validated['denum']) * 100;
-            $validated['numdenum'] = $numdenum;
-        } else {
-            $validated['numdenum'] = '-';
-        }
+        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
+        $validated['tahun_2024'] = $tahun_2024;
 
         $data = PasienPemberianObat::findOrFail($id);
         $data->update($validated);
