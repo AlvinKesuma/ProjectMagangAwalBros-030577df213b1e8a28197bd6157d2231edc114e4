@@ -66,7 +66,7 @@ Data Rasio Negative Feedback Customer vs Seluruh Feedback yang diterima
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('feedback-pelanggan.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>

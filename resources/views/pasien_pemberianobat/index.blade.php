@@ -66,7 +66,7 @@ Data Kepatuhan Identifikasi Pasien saat pemberian obat
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('pasien-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>

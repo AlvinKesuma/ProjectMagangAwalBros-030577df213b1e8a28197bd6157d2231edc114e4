@@ -75,7 +75,7 @@ Data Penundaan Operasi Elektif ≥ 1 Jam
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('penundaan-operasi-electif-1jam.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>

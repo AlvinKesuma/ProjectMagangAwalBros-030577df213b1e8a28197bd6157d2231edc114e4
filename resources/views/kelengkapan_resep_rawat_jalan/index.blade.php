@@ -66,7 +66,7 @@ Data Kelengkapan Penulisan Resep Rawat Jalan (Prescribing error)
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('identifikasi-pemberianobat.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('kelengkapan-resep-rawat-jalan.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>
