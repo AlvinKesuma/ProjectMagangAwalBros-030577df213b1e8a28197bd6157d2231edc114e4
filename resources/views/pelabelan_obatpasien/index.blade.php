@@ -18,7 +18,7 @@ Data Kepatuhan Pelabelan Obat High Alert pada Sediaan Obat yang akan Diberikan k
             </div>
 
             <div class="d-flex justify-content-between mb-4">
-                <h4>Data Kepatuhan Pelabelan Obat High Alert pada Sediaan Obat yang akan Diberikan ke Pasien Rawat Inap </h4>
+                <h4>Data Pelabelan Obat High Alert pada Sediaan Obat yang akan Diberikan ke Pasien Rawat Inap </h4>
                 <!-- Button trigger modal for creating data -->
                 <button
                   type="button"

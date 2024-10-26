@@ -18,7 +18,7 @@ Data Kepatuhan pelaksanaan identifikasi pasien sebelum pengambilan sampel darah 
             </div>
 
             <div class="d-flex justify-content-between mb-4">
-                <h4>Data Kepatuhan pelaksanaan identifikasi pasien sebelum pengambilan sampel darah laboratorium </h4>
+                <h4>Data Kepatuhan identifikasi pasien sebelum pengambilan sampel darah laboratorium </h4>
                 <!-- Button trigger modal for creating data -->
                 <button
                   type="button"
