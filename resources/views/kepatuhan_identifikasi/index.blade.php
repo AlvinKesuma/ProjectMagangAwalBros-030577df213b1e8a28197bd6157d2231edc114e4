@@ -75,11 +75,14 @@ Data Kepatuhan Identifikasi
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center">Tidak ada data.</td>
+                                <td colspan="8" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="mt-3">
+                <h5>Total Growth: {{$item->growth}} % </h5>
             </div>
         </div>
     </div>
@@ -230,7 +233,81 @@ Data Kepatuhan Identifikasi
         document.getElementById('num').value = sum;
         document.getElementById('denum').value = denum;
         document.getElementById('tahun_2024').value = tahun_2024;
+
+        // Kuartal untuk KIP 1
+        const tw1kip1 = kip1 * 3; 
+        const tw2kip1 = kip1 * 3; 
+        const tw3kip1 = kip1 * 3; 
+        const tw4kip1 = kip1 * 3; 
+
+        // Kuartal untuk KIP 2
+        const tw1kip2 = kip2 * 3;
+        const tw2kip2 = kip2 * 3;
+        const tw3kip2 = kip2 * 3;
+        const tw4kip2 = kip2 * 3;
+
+        // Kuartal untuk KIP 3
+        const tw1kip3 = kip3 * 3;
+        const tw2kip3 = kip3 * 3;
+        const tw3kip3 = kip3 * 3;
+        const tw4kip3 = kip3 * 3;
+
+        // Kuartal untuk KIP 4
+        const tw1kip4 = kip4 * 3;
+        const tw2kip4 = kip4 * 3;
+        const tw3kip4 = kip4 * 3;
+        const tw4kip4 = kip4 * 3;
+
+        // Kuartal untuk NUM
+        const tw1num = tw1kip1 + tw1kip2 + tw1kip3 + tw1kip4;
+        const tw2num = tw2kip1 + tw2kip2 + tw2kip3 + tw2kip4;
+        const tw3num = tw3kip1 + tw3kip2 + tw3kip3 + tw3kip4;
+        const tw4num = tw4kip1 + tw4kip2 + tw4kip3 + tw4kip4;
+
+        // Kuartal untuk DENUM (sama dengan NUM dalam contoh ini)
+        const tw1denum = tw1num;
+        const tw2denum = tw2num;
+        const tw3denum = tw3num;
+        const tw4denum = tw4num;
+
+        // Tahun 2024 per kuartal
+        const tw1tahun2024 = tw1num !== 0 ? ((tw1num / tw1denum) * 100).toFixed(1) : 0;
+        const tw2tahun2024 = tw2num !== 0 ? ((tw2num / tw2denum) * 100).toFixed(1) : 0;
+        const tw3tahun2024 = tw3num !== 0 ? ((tw3num / tw3denum) * 100).toFixed(1) : 0;
+        const tw4tahun2024 = tw4num !== 0 ? ((tw4num / tw4denum) * 100).toFixed(1) : 0;
+
+        // Tahun 2023 per kuartal (contoh rata-rata 3 bulan)
+        const tw1tahun2023 = ((tw1kip1 + tw1kip2 + tw1kip3) / 3).toFixed(1);
+        const tw2tahun2023 = ((tw2kip1 + tw2kip2 + tw2kip3) / 3).toFixed(1);
+        const tw3tahun2023 = ((tw3kip1 + tw3kip2 + tw3kip3) / 3).toFixed(1);
+        const tw4tahun2023 = ((tw4kip1 + tw4kip2 + tw4kip3) / 3).toFixed(1);
+
+        // Total kuartal untuk keseluruhan tahun
+        const hasiltwkip1 = tw1kip1 + tw2kip1 + tw3kip1 + tw4kip1;
+        const hasiltwkip2 = tw1kip2 + tw2kip2 + tw3kip2 + tw4kip2;
+        const hasiltwkip3 = tw1kip3 + tw2kip3 + tw3kip3 + tw4kip3;
+        const hasiltwkip4 = tw1kip4 + tw2kip4 + tw3kip4 + tw4kip4;
+
+        const hasiltwnum = tw1num + tw2num + tw3num + tw4num;
+        const hasiltwdenum = tw1denum + tw2denum + tw3denum + tw4denum;
+
+        // Total tahun 2024
+        const hasiltw2024 = hasiltwdenum !== 0 ? ((hasiltwnum / hasiltwdenum) * 100).toFixed(1) : 0;
+
+        // Total tahun 2023 (rata-rata per kuartal)
+        const hasiltw2023 = ((parseFloat(tw1tahun2023) + parseFloat(tw2tahun2023) + parseFloat(tw3tahun2023) + parseFloat(tw4tahun2023)) / 4).toFixed(1);
+
+        // Pertumbuhan
+        const growth = hasiltw2023 !== 0 ? (((hasiltw2024 / hasiltw2023) - 1) * 100).toFixed(1) : 0;
+
+        // Output hasil pertumbuhan
+        console.log("Growth:", growth + "%");
     }
+
+document.querySelectorAll('#kip1, #kip2, #kip3, #kip4').forEach(input => {
+    input.addEventListener('input', calculate);
+});
+
 
     document.querySelectorAll('#kip1, #kip2, #kip3, #kip4').forEach(input => {
         input.addEventListener('input', calculate);
