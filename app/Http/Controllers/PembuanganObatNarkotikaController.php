@@ -9,7 +9,12 @@ class PembuanganObatNarkotikaController extends Controller
 {
     public function index()
     {
-        $data = PembuanganObatNarkotika::all();
+        $data = PembuanganObatNarkotika::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
         return view('pembuangan_obatnarkotika.index', compact('data'));
     }
 

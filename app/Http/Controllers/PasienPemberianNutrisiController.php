@@ -9,7 +9,12 @@ class PasienPemberianNutrisiController extends Controller
 {
     public function index()
     {
-        $data = PasienPemberianNutrisi::all();
+        $data = PasienPemberianNutrisi::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
         return view('pasien_pemberiannutrisi.index', compact('data'));
     }
 

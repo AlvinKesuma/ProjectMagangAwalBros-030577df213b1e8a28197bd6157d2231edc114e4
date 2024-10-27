@@ -81,6 +81,15 @@ Data Kepatuhan Tim Melaksanakan Proses Time Out di VK
                     </tbody>
                 </table>
             </div>
+            <div class="mt-3">
+                <h5>
+                    @if(isset($item->growth))
+                        Growth: {{ $item->growth }} %
+                    @else
+                        Growth: Data belum ada
+                    @endif
+                </h5>
+            </div>
         </div>
     </div>
 </div>
@@ -203,11 +212,56 @@ Data Kepatuhan Tim Melaksanakan Proses Time Out di VK
         const num = parseFloat(document.getElementById('num').value) || 0;
         const denum = parseFloat(document.getElementById('denum').value) || 0;
 
+        // Calculate tahun_2024
         const tahun_2024 = denum !== 0 ? ((num / denum) * 100).toFixed(1) : 0;
-
-        document.getElementById('num').value = num;
-        document.getElementById('denum').value = denum;
         document.getElementById('tahun_2024').value = tahun_2024;
+
+        // Get values for quarterly calculations based on the month selected
+        const month = document.getElementById('month').value;
+
+        // Quarter Arrays
+        const firstQuarterMonths = ['Januari', 'Februari', 'Maret'];
+        const secondQuarterMonths = ['April', 'Mei', 'Juni'];
+        const thirdQuarterMonths = ['Juli', 'Agustus', 'September'];
+        const fourthQuarterMonths = ['Oktober', 'November', 'Desember'];
+
+        let tw1num = 0, tw2num = 0, tw3num = 0, tw4num = 0;
+        let tw1denum = 0, tw2denum = 0, tw3denum = 0, tw4denum = 0;
+
+        // Calculate quarter sums based on the month selected
+        if (firstQuarterMonths.includes(month)) {
+            tw1num += num;
+            tw1denum += denum;
+        } else if (secondQuarterMonths.includes(month)) {
+            tw2num += num;
+            tw2denum += denum;
+        } else if (thirdQuarterMonths.includes(month)) {
+            tw3num += num;
+            tw3denum += denum;
+        } else if (fourthQuarterMonths.includes(month)) {
+            tw4num += num;
+            tw4denum += denum;
+        }
+
+        // Calculate tahun2024 for quarters
+        const tw1tahun2024 = tw1denum !== 0 ? ((tw1num / tw1denum) * 100).toFixed(1) : 0;
+        const tw2tahun2024 = tw2denum !== 0 ? ((tw2num / tw2denum) * 100).toFixed(1) : 0;
+        const tw3tahun2024 = tw3denum !== 0 ? ((tw3num / tw3denum) * 100).toFixed(1) : 0;
+        const tw4tahun2024 = tw4denum !== 0 ? ((tw4num / tw4denum) * 100).toFixed(1) : 0;
+
+        // Calculate average for tahun 2023
+        const tw1tahun2023 = (tw1num + tw2num + tw3num + tw4num) / 3 || 0;
+        const tw2tahun2023 = (tw1denum + tw2denum + tw3denum + tw4denum) / 3 || 0;
+
+        const hasiltwnum = tw1num + tw2num + tw3num + tw4num;
+        const hasiltwdenum = tw1denum + tw2denum + tw3denum + tw4denum;
+
+        const hasiltw2024 = hasiltwdenum !== 0 ? ((hasiltwnum / hasiltwdenum) * 100).toFixed(1) : 0;
+        const hasiltw2023 = (tw1tahun2023 + tw2tahun2023) / 2 || 0;
+
+        const growth = hasiltw2024 / hasiltw2023 - 1;
+
+        console.log("Growth:", growth + "%");
     }
 
     document.querySelectorAll('#num, #denum').forEach(input => {

@@ -37,6 +37,10 @@ Data Kepatuhan Identifikasi
                         <tr>
                             <th>No</th>
                             <th>Unit</th>
+                            <th>KIP 1</th>
+                            <th>KIP 2</th>
+                            <th>KIP 3</th>
+                            <th>KIP 4</th>
                             <th>Num</th>
                             <th>Denum</th>
                             <th>Bulan</th>
@@ -50,6 +54,10 @@ Data Kepatuhan Identifikasi
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->unit }}</td>
+                                <td>{{ $item->kip1 }}</td>
+                                <td>{{ $item->kip2 }}</td>
+                                <td>{{ $item->kip3 }}</td>
+                                <td>{{ $item->kip4 }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
                                 <td>{{ $item->month }}</td>

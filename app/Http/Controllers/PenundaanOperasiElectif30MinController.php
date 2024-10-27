@@ -9,7 +9,12 @@ class PenundaanOperasiElectif30MinController extends Controller
 {
     public function index()
     {
-        $data = PenundaanOperasiElectif30Min::all();
+        $data = PenundaanOperasiElectif30Min::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
         return view('penundaan_operasi_electif_30Min.index', compact('data'));
     }
 

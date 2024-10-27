@@ -9,7 +9,12 @@ class WaktuTanggapSeksiSesareaController extends Controller
 {
     public function index()
     {
-        $data = WaktuTanggapSeksiSesarea::all();
+        $data = WaktuTanggapSeksiSesarea::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
         return view('waktu_tanggap_seksi_sesarea.index', compact('data'));
     }
 

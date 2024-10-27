@@ -9,7 +9,12 @@ class TimeOutVKController extends Controller
 {
     public function index()
     {
-        $data = TimeOutVK::all();
+        $data = TimeOutVK::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
         return view('timeout_vk.index', compact('data'));
     }
 

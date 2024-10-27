@@ -82,7 +82,13 @@ Data Kepatuhan pelaksanaan identifikasi pasien saat pemberian obat
                 </table>
             </div>
             <div class="mt-3">
-                <h5>Growth: {{$item->growth}} % </h5>
+                <h5>
+                    @if(isset($item->growth))
+                        Growth: {{ $item->growth }} %
+                    @else
+                        Growth: Data belum ada
+                    @endif
+                </h5>
             </div>
         </div>
     </div>
