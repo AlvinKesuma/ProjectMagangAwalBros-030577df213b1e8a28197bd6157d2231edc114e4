@@ -8,17 +8,16 @@ use Illuminate\Http\Request;
 class KepatuhanIdentifikasiController extends Controller
 {
     public function index()
-{
-    $data = KepatuhanIdentifikasi::all()->map(function ($item) {
-        $item->growth = $item->tahun_2023 != 0 
-            ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
-            : 0;
-        return $item;
-    });
+    {
+        $data = KepatuhanIdentifikasi::all()->map(function ($item) {
+            $item->growth = $item->tahun_2023 != 0 
+                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
+                : 0;
+            return $item;
+        });
 
-    return view('kepatuhan_identifikasi.index', compact('data'));
-}
-
+        return view('kepatuhan_identifikasi.index', compact('data'));
+    }
 
     public function create()
     {
