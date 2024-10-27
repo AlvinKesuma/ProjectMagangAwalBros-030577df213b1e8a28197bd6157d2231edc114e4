@@ -83,14 +83,20 @@ Data Kepatuhan Identifikasi
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">Tidak ada data.</td>
+                                <td colspan="12" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
             <div class="mt-3">
-                <h5>Growth: {{$item->growth}} % </h5>
+                <h5>
+                    @if(isset($item->growth))
+                        Growth: {{ $item->growth }} %
+                    @else
+                        Growth: Data belum ada
+                    @endif
+                </h5>
             </div>
         </div>
     </div>
