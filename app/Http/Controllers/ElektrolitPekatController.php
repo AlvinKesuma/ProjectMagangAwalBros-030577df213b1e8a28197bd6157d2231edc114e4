@@ -15,7 +15,7 @@ class ElektrolitPekatController extends Controller
 
     public function create()
     {
-        $units = ['PPI', 'Kamar Bedah', 'ICU', 'Rawat Inap', 'UGD']; // Add more units if needed
+        $units = ['PPI', 'Kamar Bedah', 'ICU', 'Rawat Inap', 'UGD'];
         return view('elektrolit_pekat.create', compact('units'));
     }
 

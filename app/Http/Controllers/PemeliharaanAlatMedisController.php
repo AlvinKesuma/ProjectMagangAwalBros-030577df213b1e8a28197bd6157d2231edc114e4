@@ -8,12 +8,7 @@ class PemeliharaanAlatMedisController extends Controller
 {
     public function index()
     {
-        $data = PemeliharaanAlatMedis::all()->map(function ($item) {
-            $item->growth = $item->tahun_2023 != 0 
-                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
-                : 0;
-            return $item;
-        });
+        $data = PemeliharaanAlatMedis::all();
         return view('pemeliharaan_alat_medis.index', compact('data'));
     }
 

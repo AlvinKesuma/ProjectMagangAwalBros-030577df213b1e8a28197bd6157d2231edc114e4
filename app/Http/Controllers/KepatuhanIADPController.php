@@ -8,12 +8,7 @@ class KepatuhanIADPController extends Controller
 {
     public function index()
     {
-        $data = KepatuhanIADP::all()->map(function ($item) {
-            $item->growth = $item->tahun_2023 != 0 
-                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
-                : 0;
-            return $item;
-        });
+        $data = KepatuhanIADP::all();
         return view('kepatuhan_iadp.index', compact('data'));
     }
 

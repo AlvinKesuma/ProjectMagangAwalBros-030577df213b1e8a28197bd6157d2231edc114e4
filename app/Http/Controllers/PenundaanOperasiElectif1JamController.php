@@ -9,12 +9,7 @@ class PenundaanOperasiElectif1JamController extends Controller
 {
     public function index()
     {
-        $data = PenundaanOperasiElectif1Jam::all()->map(function ($item) {
-            $item->growth = $item->tahun_2023 != 0 
-                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
-                : 0;
-            return $item;
-        });
+        $data = PenundaanOperasiElectif1Jam::all();
         return view('penundaan_operasi_electif_1Jam.index', compact('data'));
     }
 

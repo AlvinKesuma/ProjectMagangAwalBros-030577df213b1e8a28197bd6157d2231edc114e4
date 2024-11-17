@@ -9,12 +9,7 @@ class OperatorDaerahOperasiController extends Controller
 {
     public function index()
     {
-        $data = OperatorDaerahOperasi::all()->map(function ($item) {
-            $item->growth = $item->tahun_2023 != 0 
-                ? number_format((($item->tahun_2024 / $item->tahun_2023 - 1) * 100), 1) 
-                : 0;
-            return $item;
-        });
+        $data = OperatorDaerahOperasi::all();
         return view('operator_daerahoperasi.index', compact('data'));
     }
 
