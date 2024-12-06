@@ -9,7 +9,8 @@ class KepatuhanISKController extends Controller
     public function index()
     {
         $data = KepatuhanISK::all();
-        return view('kepatuhan_isk.index', compact('data'));
+        $results = $this->calculateTwAndGrowth($data);
+        return view('kepatuhan_isk.index', compact('data', 'results'));
     }
 
     public function create()
@@ -25,13 +26,9 @@ class KepatuhanISKController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'year' => 'required|in:2023,2024', 
         ]);
 
-        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
-        $validated['tahun_2024'] = $tahun_2024;
-
-        // Create a new entry
         KepatuhanISK::create($validated);
 
         return redirect()->route('kepatuhan-isk.index')->with('success', 'Data berhasil disimpan.');
@@ -51,13 +48,9 @@ class KepatuhanISKController extends Controller
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
             'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'year' => 'required|in:2023,2024', 
         ]);
 
-        $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
-        $validated['tahun_2024'] = $tahun_2024;
-
-        // Find the existing entry and update it
         $data = KepatuhanISK::findOrFail($id);
         $data->update($validated);
 
@@ -70,5 +63,54 @@ class KepatuhanISKController extends Controller
         $data->delete();
 
         return redirect()->route('kepatuhan-isk.index')->with('success', 'Data berhasil dihapus.');
+    }
+
+    private function calculateTwAndGrowth($data)
+    {
+        $tw1num = $tw1denum = $tw2num = $tw2denum = $tw3num = $tw3denum = $tw4num = $tw4denum = 0;
+        $tw1tahun2023 = $tw2tahun2023 = $tw3tahun2023 = $tw4tahun2023 = 0;
+
+        $firstQuarterMonths = ['Januari', 'Februari', 'Maret'];
+        $secondQuarterMonths = ['April', 'Mei', 'Juni'];
+        $thirdQuarterMonths = ['Juli', 'Agustus', 'September'];
+        $fourthQuarterMonths = ['Oktober', 'November', 'Desember'];
+
+        foreach ($data as $item) {
+            $num = (float) $item->num;
+            $denum = (float) $item->denum;
+            $month = $item->month;
+
+            if (in_array($month, $firstQuarterMonths)) {
+                $tw1num += $num;
+                $tw1denum += $denum;
+            } elseif (in_array($month, $secondQuarterMonths)) {
+                $tw2num += $num;
+                $tw2denum += $denum;
+            } elseif (in_array($month, $thirdQuarterMonths)) {
+                $tw3num += $num;
+                $tw3denum += $denum;
+            } elseif (in_array($month, $fourthQuarterMonths)) {
+                $tw4num += $num;
+                $tw4denum += $denum;
+            }
+        }
+
+        $tw1tahun2024 = ($tw1denum !== 0) ? ($tw1num / $tw1denum) * 100 : 0;
+        $tw2tahun2024 = ($tw2denum !== 0) ? ($tw2num / $tw2denum) * 100 : 0;
+        $tw3tahun2024 = ($tw3denum !== 0) ? ($tw3num / $tw3denum) * 100 : 0;
+        $tw4tahun2024 = ($tw4denum !== 0) ? ($tw4num / $tw4denum) * 100 : 0;
+
+        $hasiltwnum = $tw1num + $tw2num + $tw3num + $tw4num;
+        $hasiltwdenum = $tw1denum + $tw2denum + $tw3denum + $tw4denum;
+
+        $hasiltw2024 = ($hasiltwdenum !== 0) ? ($hasiltwnum / $hasiltwdenum) * 100 : 0;
+
+        return [
+            'tw1tahun2024' => $tw1tahun2024,
+            'tw2tahun2024' => $tw2tahun2024,
+            'tw3tahun2024' => $tw3tahun2024,
+            'tw4tahun2024' => $tw4tahun2024,
+            'hasiltw2024' => $hasiltw2024
+        ];
     }
 }

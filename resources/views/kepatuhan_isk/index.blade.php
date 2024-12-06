@@ -6,6 +6,24 @@ Data Kepatuhan Penerapan HAIs: ISK
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <!-- Total TW 2024 Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-check text-primary" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">2024</span>
+                    </div>
+                    <!-- TW 2024 Value -->
+                    <h3 class="card-title text-center text-primary fs-4">
+                        {{ number_format($results['hasiltw2024'] ?? 0, 2) }}%
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <!-- Toast for success messages -->
@@ -40,8 +58,7 @@ Data Kepatuhan Penerapan HAIs: ISK
                             <th>Num</th>
                             <th>Denum</th>
                             <th>Bulan</th>
-                            <th>2023</th>
-                            <th>2024</th>
+                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -53,8 +70,7 @@ Data Kepatuhan Penerapan HAIs: ISK
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
                                 <td>{{ $item->month }}</td>
-                                <td>{{ $item->tahun_2023 }}</td>
-                                <td>{{ $item->tahun_2024 }}</td>
+                                <td>{{ $item->year }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -75,7 +91,7 @@ Data Kepatuhan Penerapan HAIs: ISK
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center">Tidak ada data.</td>
+                                <td colspan="7" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -133,14 +149,8 @@ Data Kepatuhan Penerapan HAIs: ISK
                     </div>
                     <div class="mb-3">
                         <div class="col">
-                            <label for="tahun_2023" class="form-label">Tahun 2023</label>
-                            <input type="number" step="0.1" id="tahun_2023" name="tahun_2023" class="form-control" placeholder="Masukkan nilai tahun 2023" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="col">
-                            <label for="tahun_2024" class="form-label">Tahun 2024</label>
-                            <input type="number" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Nilai tahun 2024" readonly>
+                            <label for="year" class="form-label">Tahun</label>
+                            <input type="number" step="0.1" id="year" name="year" class="form-control" value="2024" readonly>
                         </div>
                     </div>
                 </div>

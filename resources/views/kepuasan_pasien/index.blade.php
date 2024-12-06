@@ -6,6 +6,41 @@ Data Kepuasan Pasien (IKM)
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <!-- Total TW 2023 Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-alt text-secondary" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">2023</span>
+                    </div>
+                    <!-- TW 2023 Value -->
+                    <h3 class="card-title text-center text-secondary fs-4">
+                        {{ number_format($results['hasiltw2023'] ?? 0, 2) }}%
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total TW 2024 Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-check text-primary" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">2024</span>
+                    </div>
+                    <!-- TW 2024 Value -->
+                    <h3 class="card-title text-center text-primary fs-4">
+                        {{ number_format($results['hasiltw2024'] ?? 0, 2) }}%
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <!-- Toast for success messages -->
@@ -188,8 +223,6 @@ Data Kepuasan Pasien (IKM)
         document.getElementById('formModal').action = "{{ route('kepuasan-pasien.store') }}";
         document.getElementById('formModal').querySelector('[name="_method"]').value = "POST";
         document.getElementById('exampleModalLabel1').innerText = "Tambah Data Kepuasan Pasien (IKM)";
-
-        // Autofill unit field with "CRO"
         document.getElementById('unit').value = "CRO";
     }
 
@@ -201,8 +234,8 @@ Data Kepuasan Pasien (IKM)
         
         document.getElementById('unit').value = data.unit;
         document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2023').value = data.num;
-        document.getElementById('tahun_2024').value = data.denum;
+        document.getElementById('tahun_2023').value = data.tahun_2023;
+        document.getElementById('tahun_2024').value = data.tahun_2024;
     }
 </script>
 @endsection

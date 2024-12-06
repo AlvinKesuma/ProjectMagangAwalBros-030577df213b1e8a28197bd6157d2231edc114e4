@@ -6,6 +6,62 @@ Data Ketepatan Jenis Antibiotik Profilaksis
 
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <!-- Total TW 2023 Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-alt text-secondary" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">2023</span>
+                    </div>
+                    <!-- TW 2023 Value -->
+                    <h3 class="card-title text-center text-secondary fs-4">
+                        {{ number_format($results['hasiltw2023'] ?? 0, 2) }}%
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total TW 2024 Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-check text-primary" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">2024</span>
+                    </div>
+                    <!-- TW 2024 Value -->
+                    <h3 class="card-title text-center text-primary fs-4">
+                        {{ number_format($results['hasiltw2024'] ?? 0, 2) }}%
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-3">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-between">
+                    <!-- Icon and Title -->
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-chart-line text-success" style="font-size: 40px;"></i>
+                        <span class="ms-3 fw-bold text-dark fs-5">Growth</span>
+                    </div>
+                    <!-- Growth Percentage -->
+                    <h3 class="card-title text-center text-{{ isset($results['growth']) ? ($results['growth'] >= 0 ? 'success' : 'danger') : 'muted' }} fs-4">
+                        @if(isset($results['growth']))
+                            {{ number_format($results['growth'], 2) }} %
+                        @else
+                            <span class="text-muted">Data belum tersedia</span>
+                        @endif
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <!-- Toast for success messages -->
