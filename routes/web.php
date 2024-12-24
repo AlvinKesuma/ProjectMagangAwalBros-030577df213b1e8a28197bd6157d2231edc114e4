@@ -59,6 +59,9 @@ use App\Http\Controllers\LOSgagalJantungAkutController;
 */
 
 Route::get('/', [LaporanKomiteMutuController::class, 'index'])->name('laporan-komite-mutu.index');
+Route::post('/store', [LaporanKomiteMutuController::class, 'store'])->name('laporan-komite-mutu.store');
+
+Route::get('/show/{id}', [LaporanKomiteMutuController::class, 'show'])->name('laporan-komite-mutu.show');
 
 Route::resource('laporan-komite-mutu', LaporanKomiteMutuController::class)
     ->only(['index']);

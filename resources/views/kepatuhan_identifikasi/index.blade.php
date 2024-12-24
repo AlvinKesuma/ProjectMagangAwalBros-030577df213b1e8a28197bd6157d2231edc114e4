@@ -105,7 +105,7 @@ Data Kepatuhan Identifikasi
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($data as $item)
+                        @forelse ($data2 as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->unit }}</td>
@@ -160,10 +160,10 @@ Data Kepatuhan Identifikasi
                 @method('POST') 
                 <div class="modal-body">
                     <div class="row mb-3">
-                        <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="">
+                        <input type="text" id="indikatorMutu" name="indikatorMutu" class="form-control" value="{{$id}}">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>
-                            <input type="text" id="unit" name="unit" class="form-control" placeholder="Masukkan Unit" readonly>
+                            <input type="text" id="unit" name="unit" class="form-control" placeholder="Masukkan Unit">
                         </div>
                     </div>
                     <div class="row g-2 mb-3">
@@ -187,11 +187,11 @@ Data Kepatuhan Identifikasi
                     <div class="row g-2 mb-3">
                         <div class="col">
                             <label for="num" class="form-label">Num</label>
-                            <input type="number" id="num" name="num" class="form-control" placeholder="Num" readonly>
+                            <input type="number" id="num" name="num" class="form-control" placeholder="Num" >
                         </div>
                         <div class="col">
                             <label for="denum" class="form-label">Denum</label>
-                            <input type="number" id="denum" name="denum" class="form-control" placeholder="Denum" readonly>
+                            <input type="number" id="denum" name="denum" class="form-control" placeholder="Denum" >
                         </div>
                     </div>
                     <div class="mb-3">
@@ -295,7 +295,7 @@ Data Kepatuhan Identifikasi
 
     function openCreateModal() {
         document.getElementById('formModal').reset();
-        document.getElementById('formModal').action = "{{ route('kepatuhan-identifikasi.store') }}";
+        document.getElementById('formModal').action = "{{ route('laporan-komite-mutu.store') }}";
         document.getElementById('formModal').querySelector('[name="_method"]').value = "POST";
         document.getElementById('exampleModalLabel1').innerText = "Tambah Data Kepatuhan Identifikasi";
         document.getElementById('unit').value = "Mutu";

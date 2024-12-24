@@ -13,9 +13,22 @@ Laporan Komite Mutu
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
-
+        @endif
+     @foreach($data as $val)
+    
     <div class="card mb-4 shadow-sm searchable-item">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="form-title text-secondary fw-bold">
+                {{$val->Nama}}
+                </h5>
+                <p class="text-muted mb-0">Lihat detail laporan mengenai Kepatuhan Identifikasi.</p>
+            </div>
+            <a  href="{{ route('laporan-komite-mutu.show',$val->id) }}" class="btn btn-outline-primary">Detail</a>
+        </div>
+    </div>
+    @endforeach
+    <!-- <div class="card mb-4 shadow-sm searchable-item">
         <div class="card-body d-flex justify-content-between align-items-center">
             <div>
                 <h5 class="form-title text-secondary fw-bold">
@@ -565,6 +578,6 @@ Laporan Komite Mutu
             </div>
             <a href="{{ route('los-gagal-jantung-akut.index') }}" class="btn btn-outline-primary">Detail</a>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
