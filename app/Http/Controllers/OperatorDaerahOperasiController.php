@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\OperatorDaerahOperasi;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class OperatorDaerahOperasiController extends Controller
 {
     public function index()
     {
-        $data = OperatorDaerahOperasi::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('operator_daerahoperasi.index', compact('data', 'results'));
     }
@@ -26,21 +26,21 @@ class OperatorDaerahOperasiController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        OperatorDaerahOperasi::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('operator-daerahoperasi.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = OperatorDaerahOperasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Kamar Bedah'; 
         return view('operator_daerahoperasi.edit', compact('data', 'unit'));
     }
@@ -51,14 +51,14 @@ class OperatorDaerahOperasiController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        $data = OperatorDaerahOperasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('operator-daerahoperasi.index')->with('success', 'Data berhasil diperbarui.');
@@ -66,7 +66,7 @@ class OperatorDaerahOperasiController extends Controller
 
     public function destroy($id)
     {
-        $data = OperatorDaerahOperasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('operator-daerahoperasi.index')->with('success', 'Data berhasil dihapus.');

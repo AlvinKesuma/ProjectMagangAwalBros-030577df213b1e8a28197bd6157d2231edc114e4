@@ -65,7 +65,7 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                             <th>No</th>
                             <th>Unit</th>
                             <th>Bulan</th>
-                            <th>2024</th>
+                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -74,8 +74,8 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->unit }}</td>
-                                <td>{{ $item->month }}</td>
-                                <td>{{ number_format($item->tahun_2024, 1) }}</td>
+                                <td>{{ $item->bulan }}</td>
+                                <td>{{ number_format($item->tahun, 1) }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -121,8 +121,8 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="month" class="form-label">Bulan</label>
-                        <select id="month" name="month" class="form-select" required>
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-select" required>
                             <option value="">Pilih Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -140,8 +140,8 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                     </div>
                     <div class="row g-2 mb-3">
                         <div class="col">
-                            <label for="tahun_2024" class="form-label">Tahun 2024</label>
-                            <input type="number" step="0.1" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Masukkan Nilai" required>
+                            <label for="tahun" class="form-label">Tahun 2024</label>
+                            <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan Nilai" required>
                         </div>
                     </div>
                 </div>
@@ -228,8 +228,8 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
         document.getElementById('exampleModalLabel1').innerText = "Edit Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit";
 
         document.getElementById('unit').value = data.unit;
-        document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2024').value = data.tahun_2024;
+        document.getElementById('bulan').value = data.bulan;
+        document.getElementById('tahun').value = data.tahun;
     }
 </script>
 @endsection

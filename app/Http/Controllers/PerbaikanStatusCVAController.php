@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\LaporanKomiteMutu;
 
-use App\Models\PerbaikanStatusCVA;
 class PerbaikanStatusCVAController extends Controller
 {
     public function index()
     {
-        $data = PerbaikanStatusCVA::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('perbaikan_status_cva.index', compact('data', 'results'));
     }
@@ -25,22 +24,22 @@ class PerbaikanStatusCVAController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric', 
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Create a new entry
-        PerbaikanStatusCVA::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('perbaikan-status-cva.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = PerbaikanStatusCVA::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         return view('perbaikan_status_cva.edit', compact('data', 'unit'));
     }
 
@@ -50,15 +49,15 @@ class PerbaikanStatusCVAController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric', 
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Find the existing entry and update it
-        $data = PerbaikanStatusCVA::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('perbaikan-status-cva.index')->with('success', 'Data berhasil diperbarui.');
@@ -66,7 +65,7 @@ class PerbaikanStatusCVAController extends Controller
 
     public function destroy($id)
     {
-        $data = PerbaikanStatusCVA::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('perbaikan-status-cva.index')->with('success', 'Data berhasil dihapus.');

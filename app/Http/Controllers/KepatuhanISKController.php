@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\KepatuhanISK;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class KepatuhanISKController extends Controller
 {
     public function index()
     {
-        $data = KepatuhanISK::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('kepatuhan_isk.index', compact('data', 'results'));
     }
@@ -25,18 +25,18 @@ class KepatuhanISKController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
-        KepatuhanISK::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('kepatuhan-isk.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = KepatuhanISK::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Yanmed';
         return view('kepatuhan_isk.edit', compact('data', 'unit'));
     }
@@ -47,11 +47,11 @@ class KepatuhanISKController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
-        $data = KepatuhanISK::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('kepatuhan-isk.index')->with('success', 'Data berhasil diperbarui.');
@@ -59,7 +59,7 @@ class KepatuhanISKController extends Controller
 
     public function destroy($id)
     {
-        $data = KepatuhanISK::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('kepatuhan-isk.index')->with('success', 'Data berhasil dihapus.');

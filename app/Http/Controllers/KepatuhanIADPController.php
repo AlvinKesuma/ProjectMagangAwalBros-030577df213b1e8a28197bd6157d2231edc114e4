@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\KepatuhanIADP;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class KepatuhanIADPController extends Controller
 {
     public function index()
     {
-        $data = KepatuhanIADP::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('kepatuhan_iadp.index', compact('data', 'results'));
     }
@@ -22,21 +22,22 @@ class KepatuhanIADPController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string|max:255',
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
-        KepatuhanIADP::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('kepatuhan-iadp.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = KepatuhanIADP::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'PPI';
         return view('kepatuhan_iadp.edit', compact('data', 'unit'));
     }
@@ -44,14 +45,15 @@ class KepatuhanIADPController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string|max:255',
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'year' => 'required|in:2023,2024', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
-        $data = KepatuhanIADP::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('kepatuhan-iadp.index')->with('success', 'Data berhasil diperbarui.');
@@ -59,7 +61,7 @@ class KepatuhanIADPController extends Controller
 
     public function destroy($id)
     {
-        $data = KepatuhanIADP::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('kepatuhan-iadp.index')->with('success', 'Data berhasil dihapus.');

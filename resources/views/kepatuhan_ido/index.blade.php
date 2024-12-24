@@ -70,7 +70,7 @@ Data Kepatuhan Penerapan HAIs: IDO
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
                                 <td>{{ $item->month }}</td>
-                                <td>{{ $item->year }}</td>
+                                <td>{{ $item->tahun }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -149,8 +149,8 @@ Data Kepatuhan Penerapan HAIs: IDO
                     </div>
                     <div class="mb-3">
                         <div class="col">
-                            <label for="year" class="form-label">Tahun</label>
-                            <input type="number" step="0.1" id="year" name="year" class="form-control" value="2024" readonly>
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="year" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>
@@ -229,7 +229,7 @@ Data Kepatuhan Penerapan HAIs: IDO
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
         document.getElementById('month').value = data.month;
-        document.getElementById('year').value = data.year;
+        document.getElementById('tahun').value = data.tahun;
     }
 </script>
 @endsection

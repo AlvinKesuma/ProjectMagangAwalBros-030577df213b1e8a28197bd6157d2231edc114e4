@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ElektrolitPekat;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class ElektrolitPekatController extends Controller
 {
     public function index()
     {
-        $data = ElektrolitPekat::all();
+        $data = LaporanKomiteMutu::all();
         return view('elektrolit_pekat.index', compact('data'));
     }
 
@@ -25,21 +25,21 @@ class ElektrolitPekatController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        ElektrolitPekat::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('elektrolit-pekat.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = ElektrolitPekat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $units = ['Lt.3','Bunga Kiambang', 'Bunga Kesumba', 'Pucuk Bersusun', 'Tampuk Manggis', 'Perinatologi','Intensif']; // Same unit options
         return view('elektrolit_pekat.edit', compact('data', 'units'));
     }
@@ -50,14 +50,14 @@ class ElektrolitPekatController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        $data = ElektrolitPekat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('elektrolit-pekat.index')->with('success', 'Data berhasil diperbarui.');
@@ -65,7 +65,7 @@ class ElektrolitPekatController extends Controller
 
     public function destroy($id)
     {
-        $data = ElektrolitPekat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('elektrolit-pekat.index')->with('success', 'Data berhasil dihapus.');

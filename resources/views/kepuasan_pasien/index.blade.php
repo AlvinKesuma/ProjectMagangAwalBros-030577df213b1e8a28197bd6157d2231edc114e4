@@ -73,8 +73,7 @@ Data Kepuasan Pasien (IKM)
                             <th>No</th>
                             <th>Unit</th>
                             <th>Bulan</th>
-                            <th>2023</th>
-                            <th>2024</th>
+                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -83,9 +82,8 @@ Data Kepuasan Pasien (IKM)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->unit }}</td>
-                                <td>{{ $item->month }}</td>
-                                <td>{{ $item->tahun_2023 }}</td>
-                                <td>{{ $item->tahun_2024 }}</td>
+                                <td>{{ $item->bulan }}</td>
+                                <td>{{ $item->tahun }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -135,8 +133,8 @@ Data Kepuasan Pasien (IKM)
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="month" class="form-label">Bulan</label>
-                        <select id="month" name="month" class="form-select" required>
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-select" required>
                             <option value="">Pilih Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -154,12 +152,8 @@ Data Kepuasan Pasien (IKM)
                     </div>
                     <div class="row g-2 mb-3">
                         <div class="col">
-                            <label for="tahun_2023" class="form-label">2023</label>
-                            <input type="number" step="0.1" id="tahun_2023" name="tahun_2023" class="form-control" placeholder="Masukkan Nilai" required>
-                        </div>
-                        <div class="col">
-                            <label for="tahun_2024" class="form-label">2024</label>
-                            <input type="number" step="0.1" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Masukkan Nilai" required>
+                            <label for="tahun" class="form-label">2023</label>
+                            <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan Nilai" required>
                         </div>
                     </div>
                 </div>
@@ -233,9 +227,8 @@ Data Kepuasan Pasien (IKM)
         document.getElementById('exampleModalLabel1').innerText = "Edit Data Kepuasan Pasien (IKM)";
         
         document.getElementById('unit').value = data.unit;
-        document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2023').value = data.tahun_2023;
-        document.getElementById('tahun_2024').value = data.tahun_2024;
+        document.getElementById('bulan').value = data.bulan;
+        document.getElementById('tahun').value = data.tahun;
     }
 </script>
 @endsection

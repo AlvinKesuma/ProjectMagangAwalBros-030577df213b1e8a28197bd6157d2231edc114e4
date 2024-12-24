@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AntibiotikProfilaksis;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class AntibiotikProfilaksisController extends Controller
 {
     public function index()
     {
-        $data = AntibiotikProfilaksis::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('antibiotik_profilaksis.index', compact('data', 'results'));
     }
@@ -26,22 +26,22 @@ class AntibiotikProfilaksisController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Simpan data ke database
-        AntibiotikProfilaksis::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('antibiotik-profilaksis.index')->with('success', 'Data bernumdenum disimpan.');
     }
 
     public function edit($id)
     {
-        $data = AntibiotikProfilaksis::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Kamar Bedah'; 
         return view('antibiotik_profilaksis.edit', compact('data', 'unit'));
     }
@@ -52,15 +52,15 @@ class AntibiotikProfilaksisController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Update data di database
-        $data = AntibiotikProfilaksis::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('antibiotik-profilaksis.index')->with('success', 'Data bernumdenum diperbarui.');
@@ -68,7 +68,7 @@ class AntibiotikProfilaksisController extends Controller
 
     public function destroy($id)
     {
-        $data = AntibiotikProfilaksis::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('antibiotik-profilaksis.index')->with('success', 'Data bernumdenum dihapus.');

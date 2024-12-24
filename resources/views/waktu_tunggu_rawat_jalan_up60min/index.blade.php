@@ -105,8 +105,7 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
                             <th>Num</th>
                             <th>Denum</th>
                             <th>Bulan</th>
-                            <th>2023</th>
-                            <th>2024</th>
+                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -117,9 +116,8 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
-                                <td>{{ $item->month }}</td>
-                                <td>{{ $item->tahun_2023 }}</td>
-                                <td>{{ $item->tahun_2024 }}</td>
+                                <td>{{ $item->bulan }}</td>
+                                <td>{{ $item->tahun }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -140,7 +138,7 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center">Tidak ada data.</td>
+                                <td colspan="8" class="text-center">Tidak ada data.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -179,8 +177,8 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="month" class="form-label">Bulan</label>
-                        <select id="month" name="month" class="form-select" required>
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-select" required>
                             <option value="">Pilih Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -198,14 +196,8 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
                     </div>
                     <div class="mb-3">
                         <div class="col">
-                            <label for="tahun_2023" class="form-label">Tahun 2023</label>
-                            <input type="number" step="0.1" id="tahun_2023" name="tahun_2023" class="form-control" placeholder="Masukkan nilai tahun 2023" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="col">
-                            <label for="tahun_2024" class="form-label">Tahun 2024</label>
-                            <input type="number" id="tahun_2024" name="tahun_2024" class="form-control" placeholder="Nilai tahun 2024" readonly>
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>
@@ -304,9 +296,8 @@ Data Waktu Tunggu Rawat Jalan dengan Waktu Tunggu > 60 Menit
         document.getElementById('unit').value = data.unit;
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
-        document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2023').value = data.tahun_2023;
-        document.getElementById('tahun_2024').value = data.tahun_2024;
+        document.getElementById('bulan').value = data.bulan;
+        document.getElementById('tahun').value = data.tahun;
     }
 </script>
 @endsection

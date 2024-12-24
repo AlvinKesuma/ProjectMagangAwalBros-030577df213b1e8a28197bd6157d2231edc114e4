@@ -69,8 +69,8 @@ Data Kepatuhan Penerapan HAIs: ISK
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
-                                <td>{{ $item->month }}</td>
-                                <td>{{ $item->year }}</td>
+                                <td>{{ $item->bulan }}</td>
+                                <td>{{ $item->tahun }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -130,8 +130,8 @@ Data Kepatuhan Penerapan HAIs: ISK
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="month" class="form-label">Bulan</label>
-                        <select id="month" name="month" class="form-select" required>
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-select" required>
                             <option value="">Pilih Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -149,8 +149,8 @@ Data Kepatuhan Penerapan HAIs: ISK
                     </div>
                     <div class="mb-3">
                         <div class="col">
-                            <label for="year" class="form-label">Tahun</label>
-                            <input type="number" step="0.1" id="year" name="year" class="form-control" value="2024" readonly>
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="year" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>
@@ -238,8 +238,8 @@ Data Kepatuhan Penerapan HAIs: ISK
         document.getElementById('unit').value = data.unit;
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
-        document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2023').value = data.tahun_2023;
+        document.getElementById('bulan').value = data.bulan;
+        document.getElementById('tahun').value = data.tahun;
         document.getElementById('tahun_2024').value = data.tahun_2024;
     }
 </script>

@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\KejadianWaterIntrusion;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class KejadianWaterIntrusionController extends Controller
 {
     public function index()
     {
-        $data = KejadianWaterIntrusion::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('kejadian_water_intrusion.index', compact('data', 'results'));
     }
@@ -25,22 +25,22 @@ class KejadianWaterIntrusionController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric', 
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Create a new entry
-        KejadianWaterIntrusion::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('kejadian-water-intrusion.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = KejadianWaterIntrusion::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Kamar Bedah';
         return view('kejadian_water_intrusion.edit', compact('data', 'unit'));
     }
@@ -51,15 +51,15 @@ class KejadianWaterIntrusionController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0', 
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric', 
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
         // Find the existing entry and update it
-        $data = KejadianWaterIntrusion::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('kejadian-water-intrusion.index')->with('success', 'Data berhasil diperbarui.');
@@ -67,7 +67,7 @@ class KejadianWaterIntrusionController extends Controller
 
     public function destroy($id)
     {
-        $data = KejadianWaterIntrusion::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('kejadian-water-intrusion.index')->with('success', 'Data berhasil dihapus.');

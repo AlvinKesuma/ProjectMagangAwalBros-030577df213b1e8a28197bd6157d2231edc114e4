@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IdentifikasiPemberianObat;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class IdentifikasiPemberianObatController extends Controller
 {
     public function index()
     {
-        $data = IdentifikasiPemberianObat::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('identifikasi_pemberianobat.index', compact('data', 'results'));
     }
@@ -26,21 +26,21 @@ class IdentifikasiPemberianObatController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        IdentifikasiPemberianObat::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('identifikasi-pemberianobat.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = IdentifikasiPemberianObat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         return view('identifikasi_pemberianobat.edit', compact('data', 'unit'));
     }
 
@@ -50,14 +50,14 @@ class IdentifikasiPemberianObatController extends Controller
             'unit' => 'required|string|max:255',
             'num' => 'required|numeric|between:0,100.0',
             'denum' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        $data = IdentifikasiPemberianObat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('identifikasi-pemberianobat.index')->with('success', 'Data berhasil diperbarui.');
@@ -65,7 +65,7 @@ class IdentifikasiPemberianObatController extends Controller
 
     public function destroy($id)
     {
-        $data = IdentifikasiPemberianObat::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('identifikasi-pemberianobat.index')->with('success', 'Data berhasil dihapus.');

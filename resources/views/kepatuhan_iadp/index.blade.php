@@ -69,8 +69,8 @@ Data Kepatuhan Penerapan HAIs: IADP
                                 <td>{{ $item->unit }}</td>
                                 <td>{{ $item->num }}</td>
                                 <td>{{ $item->denum }}</td>
-                                <td>{{ $item->month }}</td>
-                                <td>{{ $item->year }}</td>
+                                <td>{{ $item->bulan }}</td>
+                                <td>{{ $item->tahun }}</td>
                                 <td>
                                     <!-- Button trigger modal for editing data -->
                                     <button
@@ -82,7 +82,7 @@ Data Kepatuhan Penerapan HAIs: IADP
                                     >
                                       Edit
                                     </button>
-                                    <form action="{{ route('kepatuhan-isk.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
+                                    <form action="{{ route('kepatuhan-iadp.destroy', $item->id) }}" method="POST" class="d-inline-block delete-form">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="btn btn-danger btn-sm delete-button">Hapus</button>
@@ -111,12 +111,13 @@ Data Kepatuhan Penerapan HAIs: IADP
             </div>
             <form id="formModal" action="" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST') 
+                @method('POST')
                 <div class="modal-body">
+                    <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="Kepatuhan Penerapan HAIs: IADP">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>
-                            <input type="text" id="unit" name="unit" class="form-control" placeholder="Masukkan Unit" readonly>
+                            <input type="text" id="unit" name="unit" class="form-control" placeholder="Masukkan Unit" readonly value="">
                         </div>
                     </div>
                     <div class="row g-2 mb-3">
@@ -130,8 +131,8 @@ Data Kepatuhan Penerapan HAIs: IADP
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="month" class="form-label">Bulan</label>
-                        <select id="month" name="month" class="form-select" required>
+                        <label for="bulan" class="form-label">Bulan</label>
+                        <select id="bulan" name="bulan" class="form-select" required>
                             <option value="">Pilih Bulan</option>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
@@ -149,8 +150,8 @@ Data Kepatuhan Penerapan HAIs: IADP
                     </div>
                     <div class="mb-3">
                         <div class="col">
-                            <label for="year" class="form-label">Tahun</label>
-                            <input type="number" step="0.1" id="year" name="year" class="form-control" value="2024" readonly>
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <input type="number" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>
@@ -238,9 +239,8 @@ Data Kepatuhan Penerapan HAIs: IADP
         document.getElementById('unit').value = data.unit;
         document.getElementById('num').value = data.num;
         document.getElementById('denum').value = data.denum;
-        document.getElementById('month').value = data.month;
-        document.getElementById('tahun_2023').value = data.tahun_2023;
-        document.getElementById('tahun_2024').value = data.tahun_2024;
+        document.getElementById('bulan').value = data.bulan;
+        document.getElementById('tahun').value = data.tahun;
     }
 </script>
 @endsection

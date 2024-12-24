@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KepatuhanIdentifikasi;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class KepatuhanIdentifikasiController extends Controller
 {
     public function index()
     {
-        $data = KepatuhanIdentifikasi::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('kepatuhan_identifikasi.index', compact('data', 'results'));
     }
@@ -28,8 +28,8 @@ class KepatuhanIdentifikasiController extends Controller
             'kip2' => 'required|numeric|between:0,100.0',
             'kip3' => 'required|numeric|between:0,100.0',
             'kip4' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $num = $validated['kip1'] + $validated['kip2'] + $validated['kip3'] + $validated['kip4'];
@@ -41,14 +41,14 @@ class KepatuhanIdentifikasiController extends Controller
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
         
-        KepatuhanIdentifikasi::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('kepatuhan-identifikasi.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = KepatuhanIdentifikasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Kamar Bedah'; 
         return view('kepatuhan_identifikasi.edit', compact('data', 'unit'));
     }
@@ -62,8 +62,8 @@ class KepatuhanIdentifikasiController extends Controller
             'kip3' => 'required|numeric|between:0,100.0',
             'kip4' => 'required|numeric|between:0,100.0',
             'kip4' => 'required|numeric|between:0,100.0',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2023' => 'required|numeric|between:0,100.0',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'tahun' => 'required|numeric',
         ]);
 
         $num = $validated['kip1'] + $validated['kip2'] + $validated['kip3'] + $validated['kip4'];
@@ -75,7 +75,7 @@ class KepatuhanIdentifikasiController extends Controller
         $tahun_2024 = ($validated['num'] / $validated['denum']) * 100;
         $validated['tahun_2024'] = $tahun_2024;
 
-        $data = KepatuhanIdentifikasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('kepatuhan-identifikasi.index')->with('success', 'Data berhasil diperbarui.');
@@ -83,7 +83,7 @@ class KepatuhanIdentifikasiController extends Controller
 
     public function destroy($id)
     {
-        $data = KepatuhanIdentifikasi::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('kepatuhan-identifikasi.index')->with('success', 'Data berhasil dihapus.');

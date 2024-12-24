@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WaktuTungguRawatJalan30Min;
+use App\Models\LaporanKomiteMutu;
 use Illuminate\Http\Request;
 
 class WaktuTungguRawatJalan30MinController extends Controller
 {
     public function index()
     {
-        $data = WaktuTungguRawatJalan30Min::all();
+        $data = LaporanKomiteMutu::all();
         $results = $this->calculateTwAndGrowth($data);
         return view('waktu_tunggu_rawat_jalan_30Min.index', compact('data', 'results'));
     }
@@ -24,19 +24,19 @@ class WaktuTungguRawatJalan30MinController extends Controller
     {
         $validated = $request->validate([
             'unit' => 'required|string|max:255',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'tahun_2024' => 'required|numeric|between:0,100.0',
         ]);
 
         // Create a new entry
-        WaktuTungguRawatJalan30Min::create($validated);
+        LaporanKomiteMutu::create($validated);
 
         return redirect()->route('waktu-tunggu-rawat-jalan-30min.index')->with('success', 'Data berhasil disimpan.');
     }
 
     public function edit($id)
     {
-        $data = WaktuTungguRawatJalan30Min::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $unit = 'Mutu';
         return view('waktu_tunggu_rawat_jalan_30Min.edit', compact('data', 'unit'));
     }
@@ -45,11 +45,11 @@ class WaktuTungguRawatJalan30MinController extends Controller
     {
         $validated = $request->validate([
             'unit' => 'required|string|max:255',
-            'month' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
+            'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'tahun_2024' => 'required|numeric|between:0,100.0',
         ]);
 
-        $data = WaktuTungguRawatJalan30Min::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->update($validated);
 
         return redirect()->route('waktu-tunggu-rawat-jalan-30min.index')->with('success', 'Data berhasil diperbarui.');
@@ -57,7 +57,7 @@ class WaktuTungguRawatJalan30MinController extends Controller
 
     public function destroy($id)
     {
-        $data = WaktuTungguRawatJalan30Min::findOrFail($id);
+        $data = LaporanKomiteMutu::findOrFail($id);
         $data->delete();
 
         return redirect()->route('waktu-tunggu-rawat-jalan-30min.index')->with('success', 'Data berhasil dihapus.');
