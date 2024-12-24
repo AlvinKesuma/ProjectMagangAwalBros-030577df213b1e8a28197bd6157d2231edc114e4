@@ -23,6 +23,7 @@ class KepatuhanIdentifikasiController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'kip1' => 'required|numeric|between:0,100.0',
             'kip2' => 'required|numeric|between:0,100.0',
@@ -56,6 +57,7 @@ class KepatuhanIdentifikasiController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'kip1' => 'required|numeric|between:0,100.0',
             'kip2' => 'required|numeric|between:0,100.0',

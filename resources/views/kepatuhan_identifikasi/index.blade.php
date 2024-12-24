@@ -160,6 +160,7 @@ Data Kepatuhan Identifikasi
                 @method('POST') 
                 <div class="modal-body">
                     <div class="row mb-3">
+                        <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>
                             <input type="text" id="unit" name="unit" class="form-control" placeholder="Masukkan Unit" readonly>
@@ -214,7 +215,7 @@ Data Kepatuhan Identifikasi
                     <div class="mb-3">
                         <div class="col">
                             <label for="tahun" class="form-label">Tahun</label>
-                            <input type="year" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
+                            <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>

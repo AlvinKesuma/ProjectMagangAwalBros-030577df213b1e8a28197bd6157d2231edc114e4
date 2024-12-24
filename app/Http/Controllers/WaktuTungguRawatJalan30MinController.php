@@ -23,9 +23,10 @@ class WaktuTungguRawatJalan30MinController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2024' => 'required|numeric|between:0,100.0',
+            'tahun' => 'required|numeric|between:0,100.0',
         ]);
 
         // Create a new entry
@@ -44,9 +45,10 @@ class WaktuTungguRawatJalan30MinController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
-            'tahun_2024' => 'required|numeric|between:0,100.0',
+            'tahun' => 'required|numeric|between:0,100.0',
         ]);
 
         $data = LaporanKomiteMutu::findOrFail($id);

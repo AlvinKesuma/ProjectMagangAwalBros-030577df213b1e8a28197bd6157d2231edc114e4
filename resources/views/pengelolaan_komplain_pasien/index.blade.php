@@ -160,6 +160,7 @@ Data Monitoring Penanganan Komplain Pasien Rawat Inap
                 @csrf
                 @method('POST') 
                 <div class="modal-body">
+                    <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>
@@ -197,7 +198,7 @@ Data Monitoring Penanganan Komplain Pasien Rawat Inap
                     <div class="mb-3">
                         <div class="col">
                             <label for="tahun" class="form-label">Tahun</label>
-                            <input type="year" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
+                            <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan nilai tahun" required>
                         </div>
                     </div>
                 </div>

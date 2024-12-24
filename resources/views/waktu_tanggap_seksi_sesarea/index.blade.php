@@ -160,6 +160,7 @@ Data Waktu Tanggap Operasi Seksio Sesarea Emergensi ≤ 30 Menit
                 @csrf
                 @method('POST') 
                 <div class="modal-body">
+                    <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>

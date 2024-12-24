@@ -22,6 +22,7 @@ class KepuasanPasienController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'tahun' => 'required|numeric',
@@ -43,6 +44,7 @@ class KepuasanPasienController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
+            'indikatorMutu' => 'nullable|string',
             'unit' => 'required|string|max:255',
             'bulan' => 'required|in:Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember',
             'tahun' => 'required|numeric',

@@ -114,6 +114,7 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                 @csrf
                 @method('POST')
                 <div class="modal-body">
+                    <input type="hidden" id="indikatorMutu" name="indikatorMutu" class="form-control" value="">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="unit" class="form-label">Unit</label>
@@ -140,7 +141,7 @@ Data Rata-rata Waktu Tunggu Rawat Jalan 30 Menit
                     </div>
                     <div class="row g-2 mb-3">
                         <div class="col">
-                            <label for="tahun" class="form-label">Tahun 2024</label>
+                            <label for="tahun" class="form-label">Tahun</label>
                             <input type="number" step="0.1" id="tahun" name="tahun" class="form-control" placeholder="Masukkan Nilai" required>
                         </div>
                     </div>
